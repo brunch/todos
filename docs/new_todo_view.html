@@ -1,0 +1,34 @@
+<!DOCTYPE html>  <html> <head>   <title>new_todo_view.coffee</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="todos_collection.html">                 todos_collection.coffee               </a>                                           <a class="source" href="main_controller.html">                 main_controller.coffee               </a>                                           <a class="source" href="main.html">                 main.coffee               </a>                                           <a class="source" href="todo_model.html">                 todo_model.coffee               </a>                                           <a class="source" href="home_view.html">                 home_view.coffee               </a>                                           <a class="source" href="new_todo_view.html">                 new_todo_view.coffee               </a>                                           <a class="source" href="stats_view.html">                 stats_view.coffee               </a>                                           <a class="source" href="todo_view.html">                 todo_view.coffee               </a>                                           <a class="source" href="todos_view.html">                 todos_view.coffee               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               new_todo_view.coffee             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="k">class</span> <span class="nx">NewTodoView</span> <span class="k">extends</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span>
+
+  <span class="nv">id: </span><span class="s1">&#39;new-todo-view&#39;</span>
+
+  <span class="nv">events:</span>
+    <span class="s1">&#39;keypress #new-todo&#39;</span>  <span class="o">:</span> <span class="s1">&#39;createOnEnter&#39;</span>
+    <span class="s1">&#39;keyup #new-todo&#39;</span>     <span class="o">:</span> <span class="s1">&#39;showHint&#39;</span>
+
+  <span class="nv">render: </span><span class="o">-&gt;</span>
+    <span class="nx">@$</span><span class="p">(</span><span class="nx">@el</span><span class="p">).</span><span class="nx">html</span> <span class="nx">app</span><span class="p">.</span><span class="nx">templates</span><span class="p">.</span><span class="nx">newTodo</span><span class="p">()</span>
+    <span class="err">@</span>
+
+  <span class="nv">newAttributes: </span><span class="o">-&gt;</span>
+    <span class="nv">attributes =</span>
+      <span class="nv">order: </span><span class="nx">app</span><span class="p">.</span><span class="nx">collections</span><span class="p">.</span><span class="nx">todos</span><span class="p">.</span><span class="nx">nextOrder</span><span class="p">()</span>
+    <span class="nv">attributes.content = </span><span class="nx">@$</span><span class="p">(</span><span class="s2">&quot;#new-todo&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span> <span class="k">if</span> <span class="nx">@$</span><span class="p">(</span><span class="s2">&quot;#new-todo&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span>
+    <span class="nx">attributes</span>
+
+  <span class="nv">createOnEnter: </span><span class="nf">(event) -&gt;</span>
+    <span class="k">return</span> <span class="nx">unless</span> <span class="nx">event</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">is</span> <span class="nx">$</span><span class="p">.</span><span class="nx">ui</span><span class="p">.</span><span class="nx">keyCode</span><span class="p">.</span><span class="nx">ENTER</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">collections</span><span class="p">.</span><span class="nx">todos</span><span class="p">.</span><span class="nx">create</span> <span class="nx">@newAttributes</span><span class="p">()</span>
+    <span class="nx">@$</span><span class="p">(</span><span class="s2">&quot;#new-todo&quot;</span><span class="p">).</span><span class="nx">val</span> <span class="s1">&#39;&#39;</span>
+
+  <span class="nv">showHint: </span><span class="nf">(event) -&gt;</span>
+    <span class="nv">tooltip = </span><span class="nx">@$</span><span class="p">(</span><span class="s2">&quot;.ui-tooltip-top&quot;</span><span class="p">)</span>
+    <span class="nv">input = </span><span class="nx">@$</span><span class="p">(</span><span class="s2">&quot;#new-todo&quot;</span><span class="p">)</span>
+    <span class="nx">tooltip</span><span class="p">.</span><span class="nx">fadeOut</span><span class="p">()</span>
+    <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">@tooltipTimeout</span><span class="p">)</span> <span class="k">if</span> <span class="nx">@tooltipTimeout</span>
+    <span class="k">return</span> <span class="k">if</span> <span class="nx">input</span><span class="p">.</span><span class="nx">val</span><span class="p">()</span> <span class="o">is</span> <span class="s1">&#39;&#39;</span> <span class="o">or</span>  <span class="nx">input</span><span class="p">.</span><span class="nx">val</span><span class="p">()</span> <span class="o">is</span> <span class="nx">input</span><span class="p">.</span><span class="nx">attr</span> <span class="s1">&#39;placeholder&#39;</span>
+    <span class="nv">fadeIn = </span><span class="o">-&gt;</span>
+      <span class="nx">tooltip</span><span class="p">.</span><span class="nx">fadeIn</span><span class="p">()</span>
+    <span class="vi">@tooltipTimeout = </span><span class="nx">_</span><span class="p">.</span><span class="nx">delay</span> <span class="nx">fadeIn</span><span class="p">,</span> <span class="mi">1000</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
