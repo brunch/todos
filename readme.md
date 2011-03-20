@@ -1,4 +1,4 @@
-# Todo
+# Todos
 
 This is a rewrite of Todos (Backbone's example application). We rewrote it to provide a simple and complete brunch example. This example also contains a test suite using [QUnit](http://docs.jquery.com/Qunit). Special thanks to [Jérôme Gravel-Niquet](http://jgn.me/) for his groundwork.
 
