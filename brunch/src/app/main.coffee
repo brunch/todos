@@ -3,10 +3,15 @@ app.controllers = {}
 app.models = {}
 app.collections = {}
 app.views = {}
+app.classes = {}
+app.classes.view = {}
 
 # app bootstrapping on document ready
 $(document).ready ->
   app.initialize = ->
+    # need this for testing
+    app.classes.view.todo = TodoView
+
     app.collections.todos = new Todos()
 
     app.controllers.main = new MainController()

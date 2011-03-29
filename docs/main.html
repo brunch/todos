@@ -2,8 +2,11 @@
 <span class="nv">app.controllers = </span><span class="p">{}</span>
 <span class="nv">app.models = </span><span class="p">{}</span>
 <span class="nv">app.collections = </span><span class="p">{}</span>
-<span class="nv">app.views = </span><span class="p">{}</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>app bootstrapping on document ready</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span> <span class="o">-&gt;</span>
-  <span class="nv">app.initialize = </span><span class="o">-&gt;</span>
+<span class="nv">app.views = </span><span class="p">{}</span>
+<span class="nv">app.classes = </span><span class="p">{}</span>
+<span class="nv">app.classes.view = </span><span class="p">{}</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>app bootstrapping on document ready</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span> <span class="o">-&gt;</span>
+  <span class="nv">app.initialize = </span><span class="o">-&gt;</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>need this for testing</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nv">app.classes.view.todo = </span><span class="nx">TodoView</span>
+
     <span class="nv">app.collections.todos = </span><span class="k">new</span> <span class="nx">Todos</span><span class="p">()</span>
 
     <span class="nv">app.controllers.main = </span><span class="k">new</span> <span class="nx">MainController</span><span class="p">()</span>

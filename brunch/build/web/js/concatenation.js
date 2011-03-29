@@ -13,8 +13,11 @@
   app.models = {};
   app.collections = {};
   app.views = {};
+  app.classes = {};
+  app.classes.view = {};
   $(document).ready(function() {
     app.initialize = function() {
+      app.classes.view.todo = TodoView;
       app.collections.todos = new Todos();
       app.controllers.main = new MainController();
       app.views.home = new HomeView();
