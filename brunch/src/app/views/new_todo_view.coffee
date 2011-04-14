@@ -1,4 +1,6 @@
-class NewTodoView extends Backbone.View
+newTodoTemplate = require('templates/new_todo')
+
+class exports.NewTodoView extends Backbone.View
 
   id: 'new-todo-view'
 
@@ -7,7 +9,7 @@ class NewTodoView extends Backbone.View
     'keyup #new-todo'     : 'showHint'
 
   render: ->
-    @$(@el).html app.templates.newTodo()
+    @$(@el).html newTodoTemplate()
     @
 
   newAttributes: ->

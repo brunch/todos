@@ -6,6 +6,14 @@ app.views = {}
 app.classes = {}
 app.classes.view = {}
 
+Todos = require('collections/todos_collection').Todos
+MainController = require('controllers/main_controller').MainController
+HomeView = require('views/home_view').HomeView
+NewTodoView = require('views/new_todo_view').NewTodoView
+TodosView = require('views/todos_view').TodosView
+StatsView = require('views/stats_view').StatsView
+TodoView = require('views/todos_view').TodoView
+
 # app bootstrapping on document ready
 $(document).ready ->
   app.initialize = ->

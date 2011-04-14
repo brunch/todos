@@ -1,4 +1,6 @@
-class TodoView extends Backbone.View
+todoTemplate = require('templates/todo')
+
+class exports.TodoView extends Backbone.View
 
   tagName:  "li"
 
@@ -13,7 +15,7 @@ class TodoView extends Backbone.View
     @model.view = @
 
   render: =>
-    @$(@el).html(app.templates.todo(todo: @model.toJSON()))
+    @$(@el).html(todoTemplate(todo: @model.toJSON()))
     # Bind event directly to input, cause older browsers doesn't
     # support this event on several types of elements.
     # Originally, this event was only applicable to form elements.
