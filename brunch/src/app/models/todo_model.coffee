@@ -1,4 +1,4 @@
-class Todo extends Backbone.Model
+class exports.Todo extends Backbone.Model
 
   defaults:
     content: 'empty todo...'

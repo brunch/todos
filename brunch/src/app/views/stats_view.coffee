@@ -1,4 +1,6 @@
-class StatsView extends Backbone.View
+statsTemplate = require('templates/stats')
+
+class exports.StatsView extends Backbone.View
 
   id: 'stats-view'
 
@@ -11,7 +13,7 @@ class StatsView extends Backbone.View
       done: app.collections.todos.done().length
       remaining: app.collections.todos.remaining().length
 
-    @$(@el).html(app.templates.stats(stats: data))
+    @$(@el).html(statsTemplate(stats: data))
     @
 
   clearCompleted: ->

@@ -1,4 +1,6 @@
-class Todos extends Backbone.Collection
+Todo = require('models/todo_model').Todo
+
+class exports.Todos extends Backbone.Collection
 
   model: Todo
 
