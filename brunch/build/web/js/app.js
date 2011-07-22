@@ -10833,10 +10833,10 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   };
   Todo = require('models/todo_model').Todo;
   exports.Todos = (function() {
+    __extends(Todos, Backbone.Collection);
     function Todos() {
       Todos.__super__.constructor.apply(this, arguments);
     }
-    __extends(Todos, Backbone.Collection);
     Todos.prototype.model = Todo;
     Todos.prototype.initialize = function() {
       return this.localStorage = new Store("todos");
@@ -10876,10 +10876,10 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     return child;
   };
   exports.MainController = (function() {
+    __extends(MainController, Backbone.Controller);
     function MainController() {
       MainController.__super__.constructor.apply(this, arguments);
     }
-    __extends(MainController, Backbone.Controller);
     MainController.prototype.routes = {
       "home": "home"
     };
@@ -10897,8 +10897,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   app.models = {};
   app.collections = {};
   app.views = {};
-  app.classes = {};
-  app.classes.view = {};
   Todos = require('collections/todos_collection').Todos;
   MainController = require('controllers/main_controller').MainController;
   HomeView = require('views/home_view').HomeView;
@@ -10908,7 +10906,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   TodoView = require('views/todos_view').TodoView;
   $(document).ready(function() {
     app.initialize = function() {
-      app.classes.view.todo = TodoView;
       app.collections.todos = new Todos();
       app.controllers.main = new MainController();
       app.views.home = new HomeView();
@@ -10933,10 +10930,10 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     return child;
   };
   exports.Todo = (function() {
+    __extends(Todo, Backbone.Model);
     function Todo() {
       Todo.__super__.constructor.apply(this, arguments);
     }
-    __extends(Todo, Backbone.Model);
     Todo.prototype.defaults = {
       content: 'empty todo...',
       done: false
@@ -10954,236 +10951,266 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   })();
 }).call(this);
 }, "templates/home": function(exports, require, module) {module.exports = function(__obj) {
-  var _safe = function(value) {
-    if (typeof value === 'undefined' && value == null)
-      value = '';
-    var result = new String(value);
-    result.ecoSafe = true;
-    return result;
+  if (!__obj) __obj = {};
+  var __out = [], __capture = function(callback) {
+    var out = __out, result;
+    __out = [];
+    callback.call(this);
+    result = __out.join('');
+    __out = out;
+    return __safe(result);
+  }, __sanitize = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else if (typeof value !== 'undefined' && value != null) {
+      return __escape(value);
+    } else {
+      return '';
+    }
+  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+  __safe = __obj.safe = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else {
+      if (!(typeof value !== 'undefined' && value != null)) value = '';
+      var result = new String(value);
+      result.ecoSafe = true;
+      return result;
+    }
   };
-  return (function() {
-    var __out = [], __self = this, _print = function(value) {
-      if (typeof value !== 'undefined' && value != null)
-        __out.push(value.ecoSafe ? value : __self.escape(value));
-    }, _capture = function(callback) {
-      var out = __out, result;
-      __out = [];
-      callback.call(this);
-      result = __out.join('');
-      __out = out;
-      return _safe(result);
+  if (!__escape) {
+    __escape = __obj.escape = function(value) {
+      return ('' + value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
     };
+  }
+  (function() {
     (function() {
-      _print(_safe('<div id="todo-app">\n  <h1>Todos</h1>\n</div>\n<ul id="instructions">\n  <li>Double-click to edit a todo.</li>\n  <!-- <li><a href="../docs/todos.html">View the annotated source.</a></li> -->\n</ul>\n<div id="credits">\n  <span>Originally created by</span>\n  <a href="http://jgn.me/">J&eacute;r&ocirc;me Gravel-Niquet</a>\n  <span>Rewritten by</span>\n  <a href="https://github.com/brunch">Brunch Team</a>\n</div>\n'));
+      __out.push('<div id="todo-app">\n  <h1>Todos</h1>\n</div>\n<ul id="instructions">\n  <li>Double-click to edit a todo.</li>\n  <!-- <li><a href="../docs/todos.html">View the annotated source.</a></li> -->\n</ul>\n<div id="credits">\n  <span>Originally created by</span>\n  <a href="http://jgn.me/">J&eacute;r&ocirc;me Gravel-Niquet</a>\n  <span>Rewritten by</span>\n  <a href="https://github.com/brunch">Brunch Team</a>\n</div>\n');
     }).call(this);
     
-    return __out.join('');
-  }).call((function() {
-    var obj = {
-      escape: function(value) {
-        return ('' + value)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;');
-      },
-      safe: _safe
-    }, key;
-    for (key in __obj) obj[key] = __obj[key];
-    return obj;
-  })());
-};}, "templates/new_todo": function(exports, require, module) {module.exports = function(__obj) {
-  var _safe = function(value) {
-    if (typeof value === 'undefined' && value == null)
-      value = '';
-    var result = new String(value);
-    result.ecoSafe = true;
-    return result;
+  }).call(__obj);
+  __obj.safe = __objSafe, __obj.escape = __escape;
+  return __out.join('');
+}}, "templates/new_todo": function(exports, require, module) {module.exports = function(__obj) {
+  if (!__obj) __obj = {};
+  var __out = [], __capture = function(callback) {
+    var out = __out, result;
+    __out = [];
+    callback.call(this);
+    result = __out.join('');
+    __out = out;
+    return __safe(result);
+  }, __sanitize = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else if (typeof value !== 'undefined' && value != null) {
+      return __escape(value);
+    } else {
+      return '';
+    }
+  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+  __safe = __obj.safe = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else {
+      if (!(typeof value !== 'undefined' && value != null)) value = '';
+      var result = new String(value);
+      result.ecoSafe = true;
+      return result;
+    }
   };
-  return (function() {
-    var __out = [], __self = this, _print = function(value) {
-      if (typeof value !== 'undefined' && value != null)
-        __out.push(value.ecoSafe ? value : __self.escape(value));
-    }, _capture = function(callback) {
-      var out = __out, result;
-      __out = [];
-      callback.call(this);
-      result = __out.join('');
-      __out = out;
-      return _safe(result);
+  if (!__escape) {
+    __escape = __obj.escape = function(value) {
+      return ('' + value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
     };
+  }
+  (function() {
     (function() {
-      _print(_safe('<input id="new-todo" placeholder="What needs to be done?" type="text">\n<div class="ui-tooltip-top">Press Enter to save this task</div>\n'));
+      __out.push('<input id="new-todo" placeholder="What needs to be done?" type="text">\n<div class="ui-tooltip-top">Press Enter to save this task</div>\n');
     }).call(this);
     
-    return __out.join('');
-  }).call((function() {
-    var obj = {
-      escape: function(value) {
-        return ('' + value)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;');
-      },
-      safe: _safe
-    }, key;
-    for (key in __obj) obj[key] = __obj[key];
-    return obj;
-  })());
-};}, "templates/stats": function(exports, require, module) {module.exports = function(__obj) {
-  var _safe = function(value) {
-    if (typeof value === 'undefined' && value == null)
-      value = '';
-    var result = new String(value);
-    result.ecoSafe = true;
-    return result;
+  }).call(__obj);
+  __obj.safe = __objSafe, __obj.escape = __escape;
+  return __out.join('');
+}}, "templates/stats": function(exports, require, module) {module.exports = function(__obj) {
+  if (!__obj) __obj = {};
+  var __out = [], __capture = function(callback) {
+    var out = __out, result;
+    __out = [];
+    callback.call(this);
+    result = __out.join('');
+    __out = out;
+    return __safe(result);
+  }, __sanitize = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else if (typeof value !== 'undefined' && value != null) {
+      return __escape(value);
+    } else {
+      return '';
+    }
+  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+  __safe = __obj.safe = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else {
+      if (!(typeof value !== 'undefined' && value != null)) value = '';
+      var result = new String(value);
+      result.ecoSafe = true;
+      return result;
+    }
   };
-  return (function() {
-    var __out = [], __self = this, _print = function(value) {
-      if (typeof value !== 'undefined' && value != null)
-        __out.push(value.ecoSafe ? value : __self.escape(value));
-    }, _capture = function(callback) {
-      var out = __out, result;
-      __out = [];
-      callback.call(this);
-      result = __out.join('');
-      __out = out;
-      return _safe(result);
+  if (!__escape) {
+    __escape = __obj.escape = function(value) {
+      return ('' + value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
     };
+  }
+  (function() {
     (function() {
       if (this.stats.total) {
-        _print(_safe('\n<span class="todo-count">\n<span class="number">'));
-        _print(this.stats.remaining);
-        _print(_safe('</span>\n<span class="word">'));
+        __out.push('\n<span class="todo-count">\n<span class="number">');
+        __out.push(__sanitize(this.stats.remaining));
+        __out.push('</span>\n<span class="word">');
         if (this.stats.remaining === 1) {
-          _print(_safe('item'));
+          __out.push('item');
         } else {
-          _print(_safe('items'));
+          __out.push('items');
         }
-        _print(_safe('</span> left.\n</span>\n'));
+        __out.push('</span> left.\n</span>\n');
       }
-      _print(_safe('\n'));
+      __out.push('\n');
       if (this.stats.done) {
-        _print(_safe('\n<span class="todo-clear">\n<a href="#">\nClear <span class="number-done">'));
-        _print(this.stats.done);
-        _print(_safe('</span>\ncompleted <span class="word-done">'));
+        __out.push('\n<span class="todo-clear">\n<a href="#">\nClear <span class="number-done">');
+        __out.push(__sanitize(this.stats.done));
+        __out.push('</span>\ncompleted <span class="word-done">');
         if (this.stats.done === 1) {
-          _print(_safe('item'));
+          __out.push('item');
         } else {
-          _print(_safe('items'));
+          __out.push('items');
         }
-        _print(_safe('</span>\n</a>\n</span>\n'));
+        __out.push('</span>\n</a>\n</span>\n');
       }
-      _print(_safe('\n'));
+      __out.push('\n');
     }).call(this);
     
-    return __out.join('');
-  }).call((function() {
-    var obj = {
-      escape: function(value) {
-        return ('' + value)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;');
-      },
-      safe: _safe
-    }, key;
-    for (key in __obj) obj[key] = __obj[key];
-    return obj;
-  })());
-};}, "templates/todo": function(exports, require, module) {module.exports = function(__obj) {
-  var _safe = function(value) {
-    if (typeof value === 'undefined' && value == null)
-      value = '';
-    var result = new String(value);
-    result.ecoSafe = true;
-    return result;
+  }).call(__obj);
+  __obj.safe = __objSafe, __obj.escape = __escape;
+  return __out.join('');
+}}, "templates/todo": function(exports, require, module) {module.exports = function(__obj) {
+  if (!__obj) __obj = {};
+  var __out = [], __capture = function(callback) {
+    var out = __out, result;
+    __out = [];
+    callback.call(this);
+    result = __out.join('');
+    __out = out;
+    return __safe(result);
+  }, __sanitize = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else if (typeof value !== 'undefined' && value != null) {
+      return __escape(value);
+    } else {
+      return '';
+    }
+  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+  __safe = __obj.safe = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else {
+      if (!(typeof value !== 'undefined' && value != null)) value = '';
+      var result = new String(value);
+      result.ecoSafe = true;
+      return result;
+    }
   };
-  return (function() {
-    var __out = [], __self = this, _print = function(value) {
-      if (typeof value !== 'undefined' && value != null)
-        __out.push(value.ecoSafe ? value : __self.escape(value));
-    }, _capture = function(callback) {
-      var out = __out, result;
-      __out = [];
-      callback.call(this);
-      result = __out.join('');
-      __out = out;
-      return _safe(result);
+  if (!__escape) {
+    __escape = __obj.escape = function(value) {
+      return ('' + value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
     };
+  }
+  (function() {
     (function() {
-      _print(_safe('<div class="todo '));
+      __out.push('<div class="todo ');
       if (this.todo.done) {
-        _print(_safe('done'));
+        __out.push('done');
       }
-      _print(_safe('">\n<div class="display">\n<input class="check" type="checkbox" '));
+      __out.push('">\n<div class="display">\n<input class="check" type="checkbox" ');
       if (this.todo.done) {
-        _print(_safe('checked="checked"'));
+        __out.push('checked="checked"');
       }
-      _print(_safe('>\n<div class="todo-content">'));
-      _print(this.todo.content);
-      _print(_safe('</div>\n<span class="todo-destroy"></span>\n</div>\n<div class="edit">\n<input class="todo-input" type="text" value="'));
-      _print(this.todo.content);
-      _print(_safe('">\n</div>\n</div>\n'));
+      __out.push('>\n<div class="todo-content">');
+      __out.push(__sanitize(this.todo.content));
+      __out.push('</div>\n<span class="todo-destroy"></span>\n</div>\n<div class="edit">\n<input class="todo-input" type="text" value="');
+      __out.push(__sanitize(this.todo.content));
+      __out.push('">\n</div>\n</div>\n');
     }).call(this);
     
-    return __out.join('');
-  }).call((function() {
-    var obj = {
-      escape: function(value) {
-        return ('' + value)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;');
-      },
-      safe: _safe
-    }, key;
-    for (key in __obj) obj[key] = __obj[key];
-    return obj;
-  })());
-};}, "templates/todos": function(exports, require, module) {module.exports = function(__obj) {
-  var _safe = function(value) {
-    if (typeof value === 'undefined' && value == null)
-      value = '';
-    var result = new String(value);
-    result.ecoSafe = true;
-    return result;
+  }).call(__obj);
+  __obj.safe = __objSafe, __obj.escape = __escape;
+  return __out.join('');
+}}, "templates/todos": function(exports, require, module) {module.exports = function(__obj) {
+  if (!__obj) __obj = {};
+  var __out = [], __capture = function(callback) {
+    var out = __out, result;
+    __out = [];
+    callback.call(this);
+    result = __out.join('');
+    __out = out;
+    return __safe(result);
+  }, __sanitize = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else if (typeof value !== 'undefined' && value != null) {
+      return __escape(value);
+    } else {
+      return '';
+    }
+  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+  __safe = __obj.safe = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else {
+      if (!(typeof value !== 'undefined' && value != null)) value = '';
+      var result = new String(value);
+      result.ecoSafe = true;
+      return result;
+    }
   };
-  return (function() {
-    var __out = [], __self = this, _print = function(value) {
-      if (typeof value !== 'undefined' && value != null)
-        __out.push(value.ecoSafe ? value : __self.escape(value));
-    }, _capture = function(callback) {
-      var out = __out, result;
-      __out = [];
-      callback.call(this);
-      result = __out.join('');
-      __out = out;
-      return _safe(result);
+  if (!__escape) {
+    __escape = __obj.escape = function(value) {
+      return ('' + value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
     };
+  }
+  (function() {
     (function() {
-      _print(_safe('<ul id="todos"></ul>\n'));
+      __out.push('<ul id="todos"></ul>\n');
     }).call(this);
     
-    return __out.join('');
-  }).call((function() {
-    var obj = {
-      escape: function(value) {
-        return ('' + value)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;');
-      },
-      safe: _safe
-    }, key;
-    for (key in __obj) obj[key] = __obj[key];
-    return obj;
-  })());
-};}, "views/home_view": function(exports, require, module) {(function() {
+  }).call(__obj);
+  __obj.safe = __objSafe, __obj.escape = __escape;
+  return __out.join('');
+}}, "views/home_view": function(exports, require, module) {(function() {
   var homeTemplate;
   var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
     for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
@@ -11195,10 +11222,10 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   };
   homeTemplate = require('templates/home');
   exports.HomeView = (function() {
+    __extends(HomeView, Backbone.View);
     function HomeView() {
       HomeView.__super__.constructor.apply(this, arguments);
     }
-    __extends(HomeView, Backbone.View);
     HomeView.prototype.el = '#home-view';
     HomeView.prototype.render = function() {
       this.$(this.el).html(homeTemplate());
@@ -11222,10 +11249,10 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   };
   newTodoTemplate = require('templates/new_todo');
   exports.NewTodoView = (function() {
+    __extends(NewTodoView, Backbone.View);
     function NewTodoView() {
       NewTodoView.__super__.constructor.apply(this, arguments);
     }
-    __extends(NewTodoView, Backbone.View);
     NewTodoView.prototype.id = 'new-todo-view';
     NewTodoView.prototype.events = {
       'keypress #new-todo': 'createOnEnter',
@@ -11283,10 +11310,10 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   };
   statsTemplate = require('templates/stats');
   exports.StatsView = (function() {
+    __extends(StatsView, Backbone.View);
     function StatsView() {
       StatsView.__super__.constructor.apply(this, arguments);
     }
-    __extends(StatsView, Backbone.View);
     StatsView.prototype.id = 'stats-view';
     StatsView.prototype.events = {
       'click .todo-clear a': 'clearCompleted'
@@ -11321,11 +11348,12 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   };
   todoTemplate = require('templates/todo');
   exports.TodoView = (function() {
-    function TodoView() {
-      this.update = __bind(this.update, this);;
-      this.render = __bind(this.render, this);;      TodoView.__super__.constructor.apply(this, arguments);
-    }
     __extends(TodoView, Backbone.View);
+    function TodoView() {
+      this.update = __bind(this.update, this);
+      this.render = __bind(this.render, this);
+      TodoView.__super__.constructor.apply(this, arguments);
+    }
     TodoView.prototype.tagName = "li";
     TodoView.prototype.events = {
       'click .check': 'toggleDone',
@@ -11384,12 +11412,13 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   TodoView = require('views/todo_view').TodoView;
   todosTemplate = require('templates/todos');
   exports.TodosView = (function() {
-    function TodosView() {
-      this.renderStats = __bind(this.renderStats, this);;
-      this.addAll = __bind(this.addAll, this);;
-      this.addOne = __bind(this.addOne, this);;      TodosView.__super__.constructor.apply(this, arguments);
-    }
     __extends(TodosView, Backbone.View);
+    function TodosView() {
+      this.renderStats = __bind(this.renderStats, this);
+      this.addAll = __bind(this.addAll, this);
+      this.addOne = __bind(this.addOne, this);
+      TodosView.__super__.constructor.apply(this, arguments);
+    }
     TodosView.prototype.id = 'todos-view';
     TodosView.prototype.initialize = function() {
       app.collections.todos.bind('add', this.addOne);

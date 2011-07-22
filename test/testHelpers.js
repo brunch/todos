@@ -7,7 +7,11 @@
       return $(selector).trigger('focus').trigger(e);
     },
     createTodo: function(content) {
-      content != null ? content : content = 'bring out the garbage';
+            if (content != null) {
+        content;
+      } else {
+        content = 'bring out the garbage';
+      };
       $('#new-todo').val(content);
       return testHelpers.keydown($.ui.keyCode.ENTER, '#new-todo');
     }

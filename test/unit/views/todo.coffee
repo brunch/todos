@@ -1,11 +1,13 @@
 $(document).ready( ->
   module('todo view',
     setup: ->
+      TodoView = require('views/todo_view').TodoView
+
       window.location.hash = "home"
       app.initialize()
       Backbone.history.loadUrl()
       @todo = app.collections.todos.create()
-      @view = new window.app.classes.view.todo model: @todo
+      @view = new TodoView(model: @todo)
     teardown: ->
       localStorage.clear()
   )

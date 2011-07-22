@@ -2,11 +2,13 @@
   $(document).ready(function() {
     module('todo view', {
       setup: function() {
+        var TodoView;
+        TodoView = require('views/todo_view').TodoView;
         window.location.hash = "home";
         app.initialize();
         Backbone.history.loadUrl();
         this.todo = app.collections.todos.create();
-        return this.view = new window.app.classes.view.todo({
+        return this.view = new TodoView({
           model: this.todo
         });
       },
