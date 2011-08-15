@@ -23,6 +23,6 @@ $(document).ready ->
     app.views.todos = new TodosView()
     app.views.stats = new StatsView()
 
-    Backbone.history.saveLocation("home") if Backbone.history.getFragment() is ''
+    Backbone.history.navigate('home', false) if Backbone.history.getFragment() is ''
   app.initialize()
   Backbone.history.start()

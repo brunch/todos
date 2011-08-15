@@ -11596,7 +11596,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       app.views.todos = new TodosView();
       app.views.stats = new StatsView();
       if (Backbone.history.getFragment() === '') {
-        return Backbone.history.saveLocation("home");
+        return Backbone.history.navigate('home', false);
       }
     };
     app.initialize();
