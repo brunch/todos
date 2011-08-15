@@ -10987,6 +10987,13 @@ window.jQuery = window.$ = jQuery;
 
 }).call(this);
 
+/**
+ * Backbone localStorage Adapter v1.0
+ * https://github.com/jeromegn/Backbone.localStorage
+ *
+ * Date: Sun Aug 14 2011 09:53:55 -0400
+ */
+
 // A simple module to replace `Backbone.sync` with *localStorage*-based
 // persistence. Models are given GUIDS, and saved into a JSON object. Simple
 // as that.
@@ -11003,48 +11010,50 @@ function guid() {
 
 // Our Store is represented by a single JS object in *localStorage*. Create it
 // with a meaningful name, like the name you'd give a table.
-var Store = function(name) {
+window.Store = function(name) {
   this.name = name;
   var store = localStorage.getItem(this.name);
-  this.data = (store && JSON.parse(store)) || {};
+  this.records = (store && store.split(",")) || [];
 };
 
 _.extend(Store.prototype, {
 
   // Save the current state of the **Store** to *localStorage*.
   save: function() {
-    localStorage.setItem(this.name, JSON.stringify(this.data));
+    localStorage.setItem(this.name, this.records.join(","));
   },
 
   // Add a model, giving it a (hopefully)-unique GUID, if it doesn't already
   // have an id of it's own.
   create: function(model) {
     if (!model.id) model.id = model.attributes.id = guid();
-    this.data[model.id] = model;
+    localStorage.setItem(this.name+"-"+model.id, JSON.stringify(model));
+    this.records.push(model.id.toString());
     this.save();
     return model;
   },
 
   // Update a model by replacing its copy in `this.data`.
   update: function(model) {
-    this.data[model.id] = model;
-    this.save();
+    localStorage.setItem(this.name+"-"+model.id, JSON.stringify(model));
+    if (!_.include(this.records, model.id.toString())) this.records.push(model.id.toString()); this.save();
     return model;
   },
 
   // Retrieve a model from `this.data` by id.
   find: function(model) {
-    return this.data[model.id];
+    return JSON.parse(localStorage.getItem(this.name+"-"+model.id));
   },
 
   // Return the array of all models currently in storage.
   findAll: function() {
-    return _.values(this.data);
+    return _.map(this.records, function(id){return JSON.parse(localStorage.getItem(this.name+"-"+id));}, this);
   },
 
   // Delete a model from `this.data`, returning it.
   destroy: function(model) {
-    delete this.data[model.id];
+    localStorage.removeItem(this.name+"-"+model.id);
+    this.records = _.reject(this.records, function(record_id){return record_id == model.id.toString();});
     this.save();
     return model;
   }
@@ -11053,7 +11062,15 @@ _.extend(Store.prototype, {
 
 // Override `Backbone.sync` to use delegate to the model or collection's
 // *localStorage* property, which should be an instance of `Store`.
-Backbone.sync = function(method, model, options) {
+Backbone.sync = function(method, model, options, error) {
+
+  // Backwards compatibility with Backbone <= 0.3.3
+  if (typeof options == 'function') {
+    options = {
+      success: options,
+      error: error
+    };
+  }
 
   var resp;
   var store = model.localStorage || model.collection.localStorage;
@@ -11071,7 +11088,6 @@ Backbone.sync = function(method, model, options) {
     options.error("Record not found");
   }
 };
-
 /*!
  * jQuery UI 1.8.11
  *
