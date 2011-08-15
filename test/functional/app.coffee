@@ -23,7 +23,7 @@ $(document).ready( ->
     # check for todo entry in dom
     todoDOMEntry = $('#todos > li')
     equals todoDOMEntry.find('.todo-content').html(), 'bring out the garbage'
-    equals todoDOMEntry.find('.check').attr('checked'), false
+    equals todoDOMEntry.find('.check').is(':checked'), false
   )
 
   test("Add empty todo", ->
@@ -40,7 +40,7 @@ $(document).ready( ->
     # check for todo entry in dom
     todoDOMEntry = $('#todos > li')
     equals todoDOMEntry.find('.todo-content').html(), 'empty todo...'
-    equals todoDOMEntry.find('.check').attr('checked'), false
+    equals todoDOMEntry.find('.check').is(':checked'), false
   )
 
   test("Update todo's content", ->
