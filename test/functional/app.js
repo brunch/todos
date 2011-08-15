@@ -20,7 +20,7 @@
       equals(todo.get('done'), false);
       todoDOMEntry = $('#todos > li');
       equals(todoDOMEntry.find('.todo-content').html(), 'bring out the garbage');
-      return equals(todoDOMEntry.find('.check').attr('checked'), false);
+      return equals(todoDOMEntry.find('.check').is(':checked'), false);
     });
     test("Add empty todo", function() {
       var todo, todoDOMEntry;
@@ -32,7 +32,7 @@
       equals(todo.get('done'), false);
       todoDOMEntry = $('#todos > li');
       equals(todoDOMEntry.find('.todo-content').html(), 'empty todo...');
-      return equals(todoDOMEntry.find('.check').attr('checked'), false);
+      return equals(todoDOMEntry.find('.check').is(':checked'), false);
     });
     test("Update todo's content", function() {
       var todoDOMEntry;
