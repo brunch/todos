@@ -1,6 +1,6 @@
 (function() {
   $(document).ready(function() {
-    module('main controller', {
+    module('main router', {
       setup: function() {
         window.location.hash = "home";
         return app.initialize();

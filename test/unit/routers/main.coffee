@@ -1,5 +1,5 @@
 $(document).ready( ->
-  module('main controller',
+  module('main router',
     setup: ->
       window.location.hash = "home"
       app.initialize()

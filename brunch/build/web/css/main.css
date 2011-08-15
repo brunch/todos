@@ -12,10 +12,10 @@ a img{border:none}
 html{background:#a1afc9}
 body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:14px;line-height:1.4em;background:#a1afc9;color:#333}
 ul{list-style-type:none}
-#todo-app{width:480px;margin:0 auto 40px;background:#fff;padding:20px;-moz-box-shadow:rgba(0,0,0,0.2) 0 5px 6px 0;-webkit-box-shadow:rgba(0,0,0,0.2) 0 5px 6px 0;-o-box-shadowbox-shadow:rgba(0,0,0,0.2) 0 5px 6px 0;}
+#todo-app{width:480px;margin:0 auto 40px;background:#fff;padding:20px;-moz-box-shadow:rgba(0,0,0,0.20) 0 5px 6px 0;-webkit-box-shadow:rgba(0,0,0,0.20) 0 5px 6px 0;-o-box-shadowbox-shadow:rgba(0,0,0,0.20) 0 5px 6px 0;}
 #todo-app h1{font-size:36px;font-weight:bold;text-align:center;padding:20px 0 30px 0;line-height:1}
 #new-todo-view{position:relative;}
-#new-todo-view input{width:466px;font-size:24px;font-family:inherit;line-height:1.4em;border:1px solid #999;outline:none;padding:6px;-moz-box-shadow:rgba(0,0,0,0.2) 0 1px 2px 0 inset;-webkit-box-shadow:rgba(0,0,0,0.2) 0 1px 2px 0 inset;-o-box-shadowbox-shadow:rgba(0,0,0,0.2) 0 1px 2px 0 inset}
+#new-todo-view input{width:466px;font-size:24px;font-family:inherit;line-height:1.4em;border:1px solid #999;outline:none;padding:6px;-moz-box-shadow:rgba(0,0,0,0.20) 0 1px 2px 0 inset;-webkit-box-shadow:rgba(0,0,0,0.20) 0 1px 2px 0 inset;-o-box-shadowbox-shadow:rgba(0,0,0,0.20) 0 1px 2px 0 inset}
 #new-todo-view input::-webkit-input-placeholder{font-style:italic}
 #new-todo-view .ui-tooltip-top{display:none;position:absolute;z-index:999;width:170px;left:50%;margin-left:-85px}
 #todos{margin-top:10px;}
@@ -24,7 +24,7 @@ ul{list-style-type:none}
 #todos li.editing{padding:0;border-bottom:0}
 #todos .editing .display,#todos .edit{display:none}
 #todos .editing .edit{display:block}
-#todos .editing input{width:444px;font-size:24px;font-family:inherit;margin:0;line-height:1.6em;border:1px solid #999;outline:none;padding:10px 7px 0 27px;-moz-box-shadow:rgba(0,0,0,0.2) 0 1px 2px 0 inset;-webkit-box-shadow:rgba(0,0,0,0.2) 0 1px 2px 0 inset;-o-box-shadowbox-shadow:rgba(0,0,0,0.2) 0 1px 2px 0 inset}
+#todos .editing input{width:444px;font-size:24px;font-family:inherit;margin:0;line-height:1.6em;border:1px solid #999;outline:none;padding:10px 7px 0 27px;-moz-box-shadow:rgba(0,0,0,0.20) 0 1px 2px 0 inset;-webkit-box-shadow:rgba(0,0,0,0.20) 0 1px 2px 0 inset;-o-box-shadowbox-shadow:rgba(0,0,0,0.20) 0 1px 2px 0 inset}
 #todos .check{position:relative;top:9px;margin:0 10px 0 7px;float:left}
 #todos .done .todo-content{text-decoration:line-through;color:#777}
 #todos .todo-destroy{position:absolute;right:5px;top:14px;display:none;cursor:pointer;width:20px;height:20px;background:url("../img/destroy.png") no-repeat 0 0}
@@ -38,9 +38,9 @@ ul{list-style-type:none}
 #stats-view .todo-clear a{color:#777;font-size:12px}
 #stats-view .todo-clear a:visited{color:#777}
 #stats-view .todo-clear a:hover{color:#369}
-#instructions{width:520px;margin:10px auto;color:#777;text-shadow:rgba(200,210,230,0.8) 0 1px 0;text-align:center;}
+#instructions{width:520px;margin:10px auto;color:#777;text-shadow:rgba(200,210,230,0.80) 0 1px 0;text-align:center;}
 #instructions a{color:#369}
-#credits{width:520px;margin:30px auto;color:#333;text-shadow:rgba(200,210,230,0.8) 0 1px 0;text-align:center;}
+#credits{width:520px;margin:30px auto;color:#333;text-shadow:rgba(200,210,230,0.80) 0 1px 0;text-align:center;}
 #credits span,#credits a{display:block}
 #credits a{color:#555}
 .ui-tooltip:after,.ui-tooltip-top:after,.ui-tooltip-right:after,.ui-tooltip-bottom:after,.ui-tooltip-left:after{content:"\25B8";display:block;font-size:2em;height:0;line-height:0;position:absolute}

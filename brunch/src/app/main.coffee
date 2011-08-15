@@ -1,11 +1,11 @@
 window.app = {}
-app.controllers = {}
+app.routers = {}
 app.models = {}
 app.collections = {}
 app.views = {}
 
 Todos = require('collections/todos_collection').Todos
-MainController = require('controllers/main_controller').MainController
+MainRouter = require('routers/main_router').MainRouter
 HomeView = require('views/home_view').HomeView
 NewTodoView = require('views/new_todo_view').NewTodoView
 TodosView = require('views/todos_view').TodosView
@@ -17,7 +17,7 @@ $(document).ready ->
   app.initialize = ->
     app.collections.todos = new Todos()
 
-    app.controllers.main = new MainController()
+    app.routers.main = new MainRouter()
     app.views.home = new HomeView()
     app.views.newTodo = new NewTodoView()
     app.views.todos = new TodosView()
