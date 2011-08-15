@@ -12129,7 +12129,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     TodosView.prototype.id = 'todos-view';
     TodosView.prototype.initialize = function() {
       app.collections.todos.bind('add', this.addOne);
-      app.collections.todos.bind('refresh', this.addAll);
+      app.collections.todos.bind('reset', this.addAll);
       return app.collections.todos.bind('all', this.renderStats);
     };
     TodosView.prototype.render = function() {
