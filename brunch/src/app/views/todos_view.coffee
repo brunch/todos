@@ -7,7 +7,7 @@ class exports.TodosView extends Backbone.View
 
   initialize: ->
     app.collections.todos.bind 'add', @addOne
-    app.collections.todos.bind 'refresh', @addAll
+    app.collections.todos.bind 'reset', @addAll
     app.collections.todos.bind 'all', @renderStats
 
   render: ->
