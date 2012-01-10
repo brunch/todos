@@ -1,23 +1,16 @@
-$(document).ready( ->
-  module('main router',
-    setup: ->
-      window.location.hash = "home"
-      app.initialize()
-    teardown: ->
-      localStorage.clear()
-  )
+describe 'main router', ->
+  beforeEach ->
+    window.location.hash = "home"
+    app.initialize()
 
-  test('home route', ->
-    expect 2
+  afterEach ->
+    localStorage.clear()
 
-    # stub methods of home view and todos
-    app.views.home =
-      render: ->
-        ok true
-    app.collections.todos =
-      fetch: ->
-        ok true
-
-    Backbone.history.loadUrl()
-  )
-)
+  describe 'home route', ->
+    it 'should work', (done) ->
+      # stub methods of home view and todos
+      app.views.home =
+        render: done
+      app.collections.todos =
+        fetch: done
+      Backbone.history.loadUrl()

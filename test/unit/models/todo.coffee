@@ -1,38 +1,28 @@
-$(document).ready( ->
+describe 'app.models.Todo', ->
   todo = {}
 
-  module('todo model',
-    setup: ->
-      app.initialize()
-      @todo = app.collections.todos.create()
-    teardown: ->
-      localStorage.clear()
-      @todo = {}
-  )
+  beforeEach: ->
+    app.initialize()
+    @todo = app.todoList.create()
 
-  test('todo defaults', ->
-    expect 2
-    equals @todo.get('done'), false
-    equals @todo.get('content'), 'empty todo...'
-  )
+  afterEach: ->
+    localStorage.clear()
+    @todo = {}
 
-  test('todo toggle', ->
-    expect 2
+  it 'todo defaults', ->
+    (expect @todo.get('done')).to.not.be.ok()
+    (expect @todo.get('content')).to.equal 'empty todo...'
+
+  it 'todo toggle', ->
     @todo.toggle()
-    equals @todo.get('done'), true
+    (expect @todo.get 'done').to.be.ok()
     @todo.toggle()
-    equals @todo.get('done'), false
-  )
+    (expect @todo.get 'done').to.not.be.ok()
 
-  test('todo clear', ->
-    expect 2
-    # stub view
+  it 'todo clear', ->
     view =
-      remove: () ->
+      remove: ->
         ok true
     @todo.view = view
-
     @todo.clear()
-    equals app.collections.todos.length, 0
-  )
-)
+    (expect app.todoList.length).to.equal 0
