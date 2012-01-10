@@ -7,13 +7,13 @@ ul{list-style-type:none}
 #new-todo-view input{width:466px;font-size:24px;font-family:inherit;line-height:1.4em;border:1px solid #999;outline:none;padding:6px;-moz-box-shadow:rgba(0,0,0,0.20) 0 1px 2px 0 inset;-webkit-box-shadow:rgba(0,0,0,0.20) 0 1px 2px 0 inset;-o-box-shadow:rgba(0,0,0,0.20) 0 1px 2px 0 inset;box-shadow:rgba(0,0,0,0.20) 0 1px 2px 0 inset}
 #new-todo-view input::-webkit-input-placeholder{font-style:italic}
 #new-todo-view .ui-tooltip-top{display:none;position:absolute;z-index:999;width:170px;left:50%;margin-left:-85px}
-#todos{margin-top:10px;}
+#todos{margin-top:10px;padding-left:0;}
 #todos li{padding:12px 20px 11px 0;position:relative;font-size:24px;line-height:1.1em;border-bottom:1px solid #ccc}
 #todos li:after{content:"\0020";display:block;height:0;clear:both;overflow:hidden;visibility:hidden}
 #todos li.editing{padding:0;border-bottom:0;width:280px}
 #todos .editing .display,#todos .edit{display:none}
 #todos .editing .edit{display:block}
-#todos .editing input{width:404px;font-size:24px;font-family:inherit;margin:0;line-height:1.6em;border:1px solid #999;outline:none;padding:10px 7px 0 27px;-moz-box-shadow:rgba(0,0,0,0.20) 0 1px 2px 0 inset;-webkit-box-shadow:rgba(0,0,0,0.20) 0 1px 2px 0 inset;-o-box-shadow:rgba(0,0,0,0.20) 0 1px 2px 0 inset;box-shadow:rgba(0,0,0,0.20) 0 1px 2px 0 inset}
+#todos .editing input{width:444px;font-size:24px;font-family:inherit;margin:0;line-height:1.6em;border:1px solid #999;outline:none;padding:10px 7px 0 27px;-moz-box-shadow:rgba(0,0,0,0.20) 0 1px 2px 0 inset;-webkit-box-shadow:rgba(0,0,0,0.20) 0 1px 2px 0 inset;-o-box-shadow:rgba(0,0,0,0.20) 0 1px 2px 0 inset;box-shadow:rgba(0,0,0,0.20) 0 1px 2px 0 inset}
 #todos .check{position:relative;top:9px;margin:0 10px 0 7px;float:left}
 #todos .done .todo-content{text-decoration:line-through;color:#777}
 #todos .todo-destroy{position:absolute;right:5px;top:14px;display:none;cursor:pointer;width:20px;height:20px;background:url("../images/destroy.png") no-repeat 0 0}
