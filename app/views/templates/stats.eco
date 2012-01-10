@@ -9,12 +9,10 @@
 <% end %>
 
 <% if @stats.done: %>
-  <span class="todo-clear">
-    <a href="#">
-      Clear <span class="number-done"><%= @stats.done %></span> completed
-      <span class="word-done">
-        <% if @stats.done is 1: %>item<% else: %>items<% end %>
-      </span>
-    </a>
+  <a class="todo-clear">
+    Clear <span class="number-done"><%= @stats.done %></span> completed
+    <span class="word-done">
+      <% if @stats.done is 1: %>item<% else: %>items<% end %>
+    </span>
   </span>
 <% end %>

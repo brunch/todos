@@ -4,7 +4,7 @@ statsTemplate = require './templates/stats'
 class exports.StatsView extends Backbone.View
   id: 'stats-view'
   events:
-    'click .todo-clear a' : 'clearCompleted'
+    'click .todo-clear' : 'clearCompleted'
 
   render: ->
     data =

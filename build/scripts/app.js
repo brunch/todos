@@ -11354,110 +11354,6 @@ window.jQuery = window.$ = jQuery;
   };
 
 }).call(this);
-/**
- * Backbone localStorage Adapter v1.0
- * https://github.com/jeromegn/Backbone.localStorage
- */
-
-// A simple module to replace `Backbone.sync` with *localStorage*-based
-// persistence. Models are given GUIDS, and saved into a JSON object. Simple
-// as that.
-
-// Generate four random hex digits.
-function S4() {
-   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-};
-
-// Generate a pseudo-GUID by concatenating random hexadecimal.
-function guid() {
-   return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
-};
-
-// Our Store is represented by a single JS object in *localStorage*. Create it
-// with a meaningful name, like the name you'd give a table.
-window.Store = function(name) {
-  this.name = name;
-  var store = localStorage.getItem(this.name);
-  this.records = (store && store.split(",")) || [];
-};
-
-_.extend(Store.prototype, {
-
-  // Save the current state of the **Store** to *localStorage*.
-  save: function() {
-    localStorage.setItem(this.name, this.records.join(","));
-  },
-
-  // Add a model, giving it a (hopefully)-unique GUID, if it doesn't already
-  // have an id of it's own.
-  create: function(model) {
-    if (!model.id) model.id = model.attributes.id = guid();
-    localStorage.setItem(this.name+"-"+model.id, JSON.stringify(model));
-    this.records.push(model.id.toString());
-    this.save();
-    return model;
-  },
-
-  // Update a model by replacing its copy in `this.data`.
-  update: function(model) {
-    localStorage.setItem(this.name+"-"+model.id, JSON.stringify(model));
-    if (!_.include(this.records, model.id.toString())) this.records.push(model.id.toString()); this.save();
-    return model;
-  },
-
-  // Retrieve a model from `this.data` by id.
-  find: function(model) {
-    return JSON.parse(localStorage.getItem(this.name+"-"+model.id));
-  },
-
-  // Return the array of all models currently in storage.
-  findAll: function() {
-    return _.map(this.records, function(id){return JSON.parse(localStorage.getItem(this.name+"-"+id));}, this);
-  },
-
-  // Delete a model from `this.data`, returning it.
-  destroy: function(model) {
-    localStorage.removeItem(this.name+"-"+model.id);
-    this.records = _.reject(this.records, function(record_id){return record_id == model.id.toString();});
-    this.save();
-    return model;
-  }
-
-});
-
-// localSync delegate to the model or collection's
-// *localStorage* property, which should be an instance of `Store`.
-Backbone.localSync = function(method, model, options, error) {
-
-  // Backwards compatibility with Backbone <= 0.3.3
-  if (typeof options == 'function') {
-    options = {
-      success: options,
-      error: error
-    };
-  }
-
-  var resp;
-  var store = model.localStorage || model.collection.localStorage;
-
-  switch (method) {
-    case "read":    resp = model.id != undefined ? store.find(model) : store.findAll(); break;
-    case "create":  resp = store.create(model);                            break;
-    case "update":  resp = store.update(model);                            break;
-    case "delete":  resp = store.destroy(model);                           break;
-  }
-
-  if (resp) {
-    options.success(resp);
-  } else {
-    options.error("Record not found");
-  }
-};
-
-// Override 'Backbone.sync' to default to localSync, 
-// the original 'Backbone.sync' is still available in 'Backbone.ajaxSync'
-Backbone.ajaxSync = Backbone.sync;
-Backbone.sync = Backbone.localSync;
 /*!
  * jQuery UI 1.8.11
  *
@@ -11864,6 +11760,110 @@ load:function(c){c=this._getIndex(c);var h=this,i=this.options,j=this.anchors.eq
 "cache.tabs",true);h._trigger("load",null,h._ui(h.anchors[c],h.panels[c]));try{i.ajaxOptions.success(l,k)}catch(m){}},error:function(l,k){h._cleanup();h._trigger("load",null,h._ui(h.anchors[c],h.panels[c]));try{i.ajaxOptions.error(l,k,c,j)}catch(m){}}}));h.element.dequeue("tabs");return this}},abort:function(){this.element.queue([]);this.panels.stop(false,true);this.element.queue("tabs",this.element.queue("tabs").splice(-2,2));if(this.xhr){this.xhr.abort();delete this.xhr}this._cleanup();return this},
 url:function(c,h){this.anchors.eq(c).removeData("cache.tabs").data("load.tabs",h);return this},length:function(){return this.anchors.length}});b.extend(b.ui.tabs,{version:"1.8.11"});b.extend(b.ui.tabs.prototype,{rotation:null,rotate:function(c,h){var i=this,j=this.options,n=i._rotate||(i._rotate=function(p){clearTimeout(i.rotation);i.rotation=setTimeout(function(){var l=j.selected;i.select(++l<i.anchors.length?l:0)},c);p&&p.stopPropagation()});h=i._unrotate||(i._unrotate=!h?function(p){p.clientX&&
 i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow",n);this.anchors.bind(j.event+".tabs",h);n()}else{clearTimeout(i.rotation);this.element.unbind("tabsshow",n);this.anchors.unbind(j.event+".tabs",h);delete this._rotate;delete this._unrotate}return this}})})(jQuery);
+/**
+ * Backbone localStorage Adapter v1.0
+ * https://github.com/jeromegn/Backbone.localStorage
+ */
+
+// A simple module to replace `Backbone.sync` with *localStorage*-based
+// persistence. Models are given GUIDS, and saved into a JSON object. Simple
+// as that.
+
+// Generate four random hex digits.
+function S4() {
+   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+};
+
+// Generate a pseudo-GUID by concatenating random hexadecimal.
+function guid() {
+   return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+};
+
+// Our Store is represented by a single JS object in *localStorage*. Create it
+// with a meaningful name, like the name you'd give a table.
+window.Store = function(name) {
+  this.name = name;
+  var store = localStorage.getItem(this.name);
+  this.records = (store && store.split(",")) || [];
+};
+
+_.extend(Store.prototype, {
+
+  // Save the current state of the **Store** to *localStorage*.
+  save: function() {
+    localStorage.setItem(this.name, this.records.join(","));
+  },
+
+  // Add a model, giving it a (hopefully)-unique GUID, if it doesn't already
+  // have an id of it's own.
+  create: function(model) {
+    if (!model.id) model.id = model.attributes.id = guid();
+    localStorage.setItem(this.name+"-"+model.id, JSON.stringify(model));
+    this.records.push(model.id.toString());
+    this.save();
+    return model;
+  },
+
+  // Update a model by replacing its copy in `this.data`.
+  update: function(model) {
+    localStorage.setItem(this.name+"-"+model.id, JSON.stringify(model));
+    if (!_.include(this.records, model.id.toString())) this.records.push(model.id.toString()); this.save();
+    return model;
+  },
+
+  // Retrieve a model from `this.data` by id.
+  find: function(model) {
+    return JSON.parse(localStorage.getItem(this.name+"-"+model.id));
+  },
+
+  // Return the array of all models currently in storage.
+  findAll: function() {
+    return _.map(this.records, function(id){return JSON.parse(localStorage.getItem(this.name+"-"+id));}, this);
+  },
+
+  // Delete a model from `this.data`, returning it.
+  destroy: function(model) {
+    localStorage.removeItem(this.name+"-"+model.id);
+    this.records = _.reject(this.records, function(record_id){return record_id == model.id.toString();});
+    this.save();
+    return model;
+  }
+
+});
+
+// localSync delegate to the model or collection's
+// *localStorage* property, which should be an instance of `Store`.
+Backbone.localSync = function(method, model, options, error) {
+
+  // Backwards compatibility with Backbone <= 0.3.3
+  if (typeof options == 'function') {
+    options = {
+      success: options,
+      error: error
+    };
+  }
+
+  var resp;
+  var store = model.localStorage || model.collection.localStorage;
+
+  switch (method) {
+    case "read":    resp = model.id != undefined ? store.find(model) : store.findAll(); break;
+    case "create":  resp = store.create(model);                            break;
+    case "update":  resp = store.update(model);                            break;
+    case "delete":  resp = store.destroy(model);                           break;
+  }
+
+  if (resp) {
+    options.success(resp);
+  } else {
+    options.error("Record not found");
+  }
+};
+
+// Override 'Backbone.sync' to default to localSync, 
+// the original 'Backbone.sync' is still available in 'Backbone.ajaxSync'
+Backbone.ajaxSync = Backbone.sync;
+Backbone.sync = Backbone.localSync;
 (this.require.define({
   "views/new_todo_view": function(exports, require, module) {
     (function() {
@@ -11950,7 +11950,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     StatsView.prototype.id = 'stats-view';
 
     StatsView.prototype.events = {
-      'click .todo-clear a': 'clearCompleted'
+      'click .todo-clear': 'clearCompleted'
     };
 
     StatsView.prototype.render = function() {
@@ -12360,7 +12360,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   }
 }));
 (this.require.define({
-  "views/templates/stats": function(exports, require, module) {
+  "views/templates/new_todo": function(exports, require, module) {
     module.exports = function(__obj) {
   var _safe = function(value) {
     if (typeof value === 'undefined' && value == null)
@@ -12383,33 +12383,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     };
     (function() {
     
-      if (this.stats.total) {
-        _print(_safe('\n  <span class="todo-count">\n    <span class="number">'));
-        _print(this.stats.remaining);
-        _print(_safe('</span>\n    <span class="word">\n      '));
-        if (this.stats.remaining === 1) {
-          _print(_safe('item'));
-        } else {
-          _print(_safe('items'));
-        }
-        _print(_safe('\n    </span>\n    left.\n  </span>\n'));
-      }
-    
-      _print(_safe('\n\n'));
-    
-      if (this.stats.done) {
-        _print(_safe('\n  <span class="todo-clear">\n    <a href="#">\n      Clear <span class="number-done">'));
-        _print(this.stats.done);
-        _print(_safe('</span> completed\n      <span class="word-done">\n        '));
-        if (this.stats.done === 1) {
-          _print(_safe('item'));
-        } else {
-          _print(_safe('items'));
-        }
-        _print(_safe('\n      </span>\n    </a>\n  </span>\n'));
-      }
-    
-      _print(_safe('\n'));
+      _print(_safe('<input id="new-todo" placeholder="What needs to be done?" type="text">\n<div class="ui-tooltip-top">Press Enter to save this task</div>\n'));
     
     }).call(this);
     
@@ -12502,7 +12476,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   }
 }));
 (this.require.define({
-  "views/templates/new_todo": function(exports, require, module) {
+  "views/templates/stats": function(exports, require, module) {
     module.exports = function(__obj) {
   var _safe = function(value) {
     if (typeof value === 'undefined' && value == null)
@@ -12525,7 +12499,79 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     };
     (function() {
     
-      _print(_safe('<input id="new-todo" placeholder="What needs to be done?" type="text">\n<div class="ui-tooltip-top">Press Enter to save this task</div>\n'));
+      if (this.stats.total) {
+        _print(_safe('\n  <span class="todo-count">\n    <span class="number">'));
+        _print(this.stats.remaining);
+        _print(_safe('</span>\n    <span class="word">\n      '));
+        if (this.stats.remaining === 1) {
+          _print(_safe('item'));
+        } else {
+          _print(_safe('items'));
+        }
+        _print(_safe('\n    </span>\n    left.\n  </span>\n'));
+      }
+    
+      _print(_safe('\n\n'));
+    
+      if (this.stats.done) {
+        _print(_safe('\n  <a class="todo-clear">\n    Clear <span class="number-done">'));
+        _print(this.stats.done);
+        _print(_safe('</span> completed\n    <span class="word-done">\n      '));
+        if (this.stats.done === 1) {
+          _print(_safe('item'));
+        } else {
+          _print(_safe('items'));
+        }
+        _print(_safe('\n    </span>\n  </span>\n'));
+      }
+    
+      _print(_safe('\n'));
+    
+    }).call(this);
+    
+    return __out.join('');
+  }).call((function() {
+    var obj = {
+      escape: function(value) {
+        return ('' + value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      },
+      safe: _safe
+    }, key;
+    for (key in __obj) obj[key] = __obj[key];
+    return obj;
+  })());
+};
+  }
+}));
+(this.require.define({
+  "views/templates/todo_list": function(exports, require, module) {
+    module.exports = function(__obj) {
+  var _safe = function(value) {
+    if (typeof value === 'undefined' && value == null)
+      value = '';
+    var result = new String(value);
+    result.ecoSafe = true;
+    return result;
+  };
+  return (function() {
+    var __out = [], __self = this, _print = function(value) {
+      if (typeof value !== 'undefined' && value != null)
+        __out.push(value.ecoSafe ? value : __self.escape(value));
+    }, _capture = function(callback) {
+      var out = __out, result;
+      __out = [];
+      callback.call(this);
+      result = __out.join('');
+      __out = out;
+      return _safe(result);
+    };
+    (function() {
+    
+      _print(_safe('<ul id="todos"></ul>\n'));
     
     }).call(this);
     
@@ -12588,52 +12634,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       _print(this.todo.content);
     
       _print(_safe('">\n  </div>\n</div>\n'));
-    
-    }).call(this);
-    
-    return __out.join('');
-  }).call((function() {
-    var obj = {
-      escape: function(value) {
-        return ('' + value)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;');
-      },
-      safe: _safe
-    }, key;
-    for (key in __obj) obj[key] = __obj[key];
-    return obj;
-  })());
-};
-  }
-}));
-(this.require.define({
-  "views/templates/todo_list": function(exports, require, module) {
-    module.exports = function(__obj) {
-  var _safe = function(value) {
-    if (typeof value === 'undefined' && value == null)
-      value = '';
-    var result = new String(value);
-    result.ecoSafe = true;
-    return result;
-  };
-  return (function() {
-    var __out = [], __self = this, _print = function(value) {
-      if (typeof value !== 'undefined' && value != null)
-        __out.push(value.ecoSafe ? value : __self.escape(value));
-    }, _capture = function(callback) {
-      var out = __out, result;
-      __out = [];
-      callback.call(this);
-      result = __out.join('');
-      __out = out;
-      return _safe(result);
-    };
-    (function() {
-    
-      _print(_safe('<ul id="todos"></ul>\n'));
     
     }).call(this);
     

@@ -14,6 +14,8 @@ exports.config =
           'vendor/scripts/jquery-1.7.js'
           'vendor/scripts/underscore-1.1.7.js'
           'vendor/scripts/backbone-0.5.3.js'
+          'vendor/scripts/backbone-localStorage.js'
+          'vendor/scripts/jquery-ui.1.8.11.min.js'
         ]
 
     'styles/app.css':
