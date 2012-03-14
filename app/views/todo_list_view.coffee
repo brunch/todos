@@ -7,7 +7,7 @@ class exports.TodoListView extends Backbone.View
 
   addOne: (todo) =>
     view = new TodoView model: todo
-    $(@el).find('#todos').append view.render().el
+    @$el.find('#todos').append view.render().el
 
   addAll: =>
     # TODO explain why this is working - see underscore source
@@ -19,7 +19,7 @@ class exports.TodoListView extends Backbone.View
     app.todoList.bind 'all', @renderStats
 
   render: ->
-    $(@el).html todoListTemplate()
+    @$el.html todoListTemplate()
     this
 
   renderStats: =>

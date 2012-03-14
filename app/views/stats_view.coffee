@@ -12,7 +12,7 @@ class exports.StatsView extends Backbone.View
       done: app.todoList.done().length
       remaining: app.todoList.remaining().length
 
-    @$(@el).html statsTemplate stats: data
+    @$el.html statsTemplate stats: data
     this
 
   clearCompleted: ->

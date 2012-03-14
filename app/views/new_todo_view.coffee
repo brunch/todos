@@ -8,7 +8,7 @@ class exports.NewTodoView extends Backbone.View
     'keyup #new-todo': 'showHint'
 
   render: ->
-    @$(@el).html newTodoTemplate()
+    @$el.html newTodoTemplate()
     this
 
   newAttributes: ->

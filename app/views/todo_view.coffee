@@ -14,7 +14,7 @@ class exports.TodoView extends Backbone.View
     @model.view = this
 
   render: =>
-    @$(@el).html todoTemplate todo: @model.toJSON()
+    @$el.html todoTemplate todo: @model.toJSON()
     # Bind event directly to input, cause older browsers doesn't
     # support this event on several types of elements.
     # Originally, this event was only applicable to form elements.
@@ -25,18 +25,18 @@ class exports.TodoView extends Backbone.View
     @model.toggle()
 
   edit: ->
-    @$(@el).addClass 'editing'
+    @$el.addClass 'editing'
     $('.todo-input').focus()
 
   update: =>
     @model.save content: @$('.todo-input').val()
-    @$(@el).removeClass 'editing'
+    @$el.removeClass 'editing'
 
   updateOnEnter: (event) ->
     @update() if event.keyCode is $.ui.keyCode.ENTER
 
   remove: ->
-    $(@el).remove()
+    @$el.remove()
 
   clear: ->
     @model.clear()
