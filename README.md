@@ -13,14 +13,6 @@ Why didn't we do that in this example? Unless you have a large set of items the 
 Use `brunch build` or `brunch watch` to compile changes in src folder.
 Usually we don't track the js/css files in our repositories, but decided to keep them here because we hope it would be easier to start using it.
 
-## How to run tests
-
-To regenerate js test files run
-
-    cake compileTests
-
-and view `test/index.html` in your browser.
-
 ## Improvements
 
 * Add unit tests for views

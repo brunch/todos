@@ -1,5 +1,5 @@
 // Make it safe to do console.log() always.
-(function (con) {
+(function(con) {
   var method;
   var dummy = function() {};
   var methods = ('assert,count,debug,dir,dirxml,error,exception,group,' +
