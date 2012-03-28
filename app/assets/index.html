@@ -11,9 +11,15 @@
   <link rel="stylesheet" href="stylesheets/app.css">
   <script src="javascripts/vendor.js"></script>
   <script src="javascripts/app.js"></script>
-  <script>require('initialize');</script>
+  <script>$(function() {
+    require('application').initialize();
+  });</script>
 </head>
 <body>
-  <div id="home-view"></div>
+  <div id="page-container">
+    <nav id="navigation-container"></nav>
+    <div id="content-container"></div>
+    <aside id="sidebar-container"></aside>
+  </div>
 </body>
 </html>

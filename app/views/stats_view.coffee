@@ -1,19 +1,23 @@
-statsTemplate = require './templates/stats'
+template = require './templates/stats'
+View = require './view'
 
+module.exports = class StatsView extends Backbone.View
+  @template = template
 
-class exports.StatsView extends Backbone.View
-  id: 'stats-view'
+  id: 'stats-view'  
   events:
     'click .todo-clear' : 'clearCompleted'
 
-  render: ->
-    data =
-      total: app.todoList.length
-      done: app.todoList.done().length
-      remaining: app.todoList.remaining().length
+  initialize: ->
+    mediator.on 'renderStats', @render
 
-    @$el.html statsTemplate stats: data
+  render: ->
+    stats =
+      total: @collection.length
+      done: @collection.done().length
+      remaining: @collection.remaining().length
+    @$el.html @template {stats}
     this
 
   clearCompleted: ->
-    app.todoList.clearCompleted()
+    @collection.clearCompleted()

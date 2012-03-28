@@ -1,13 +1,23 @@
-homeTemplate = require './templates/home'
+mediator = require 'mediator'
+NewTodoView = require './new_todo_view'
+TodoListView = require './todo_list_view'
+StatsView = require './stats_view'
+View = require './view'
 
+module.exports = class HomeView extends View
+  @template = template
 
-class exports.HomeView extends Backbone.View
   el: '#home-view'
 
-  render: ->
-    console.log 'Rendering',
-    @$el.html homeTemplate()
-    $todo =  @$el.find('#todo-app')
-    for viewName in ['newTodo', 'todoList', 'stats']
-      $todo.append app.views[viewName].render().el
-    this
+  # render: ->
+  #   @$el.html @template()
+  #   $todo = @$el.find('#todo-app')
+  # 
+  #   collection = mediator.todoList
+  #   newTodoView = new NewTodoView {collection}
+  #   todoListView = new TodoListView {collection}
+  #   statsView = new StatsView {collection}
+  # 
+  #   for view in [newTodoView, todoListView, statsView]
+  #     $todo.append view.render().el
+  #   this

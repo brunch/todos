@@ -1,25 +1,27 @@
-newTodoTemplate = require './templates/new_todo'
+template = require './templates/new_todo'
 
-class exports.NewTodoView extends Backbone.View
+module.exports = class NewTodoView extends Backbone.View
+  @template = template
+
   id: 'new-todo-view'
-
   events:
     'keypress #new-todo': 'createOnEnter'
     'keyup #new-todo': 'showHint'
 
   render: ->
-    @$el.html newTodoTemplate()
+    @$el.html @template()
     this
 
   newAttributes: ->
     attributes =
-      order: app.todoList.nextOrder()
-    attributes.content = @$('#new-todo').val() if @$('#new-todo').val()
+      order: @collection.nextOrder()
+    value = @$('#new-todo').val()
+    attributes.content = value if value
     attributes
 
   createOnEnter: (event) ->
     return unless event.keyCode is 13
-    app.todoList.create @newAttributes()
+    @collection.create @newAttributes()
     @$('#new-todo').val ''
 
   showHint: (event) ->
@@ -27,5 +29,5 @@ class exports.NewTodoView extends Backbone.View
     input = @$('#new-todo')
     tooltip.fadeOut()
     clearTimeout @tooltipTimeout if @tooltipTimeout
-    return if input.val() is '' or  input.val() is input.attr 'placeholder'
+    return if input.val() is '' or  input.val() is input.attr('placeholder')
     @tooltipTimeout = setTimeout (-> tooltip.fadeIn()), 1000

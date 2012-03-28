@@ -1,42 +1,56 @@
-todoTemplate = require './templates/todo'
+template = require './templates/todo'
+View = require './view'
 
-class exports.TodoView extends Backbone.View
+module.exports = class TodoView extends View
+  # Cache the template function for a single item.
+  @template = template
+
+  # ... is a list tag.
   tagName: 'li'
+  className: 'todo'
 
-  events:
-    'click .check': 'toggleDone'
-    'dblclick .todo-content': 'edit'
-    'click .todo-destroy': 'clear'
-    'keypress .todo-input': 'updateOnEnter'
-
-  initialize: ->
-    @model.bind 'change', @render
-    @model.view = this
-
-  render: =>
-    @$el.html todoTemplate todo: @model.toJSON()
-    # Bind event directly to input, cause older browsers doesn't
-    # support this event on several types of elements.
-    # Originally, this event was only applicable to form elements.
-    @$('.todo-input').bind 'blur', @update
-    this
-
-  toggleDone: ->
-    @model.toggle()
-
-  edit: ->
-    @$el.addClass 'editing'
-    $('.todo-input').focus()
-
-  update: =>
-    @model.save content: @$('.todo-input').val()
-    @$el.removeClass 'editing'
-
-  updateOnEnter: (event) ->
-    @update() if event.keyCode is $.ui.keyCode.ENTER
-
-  remove: ->
-    @$el.remove()
-
-  clear: ->
-    @model.clear()
+  # # The DOM events specific to an item.
+  # events:
+  #   'click .toggle':   'toggleDone'
+  #   'dblclick .view':  'edit'
+  #   'click a.destroy': 'clear'
+  #   'keypress .edit':  'updateOnEnter'
+  #   'blur .edit':      'close'
+  # 
+  # # The TodoView listens for changes to its model, re-rendering. Since there's
+  # # a one-to-one correspondence between a **Todo** and a **TodoView** in this
+  # # app, we set a direct reference on the model for convenience.
+  # initialize: ->
+  #   @model.on 'change', @render
+  #   @model.on 'destroy', @remove
+  # 
+  # # Re-render the titles of the todo item.
+  # render: =>
+  #   @$el.html @template todo: @model.toJSON()
+  #   @$el.toggleClass 'done', @model.get('done')
+  #   @input = @$('.edit')
+  #   this
+  # 
+  # # Toggle the `"done"` state of the model.
+  # toggleDone: ->
+  #   @model.toggle()
+  # 
+  # # Switch this view into `"editing"` mode, displaying the input field.
+  # edit: ->
+  #   @$el.addClass 'editing'
+  #   @input.focus()
+  # 
+  # # Close the `"editing"` mode, saving changes to the todo.
+  # close: ->
+  #   value = @input.val()
+  #   @clear() unless value
+  #   @model.save title: value
+  #   @$el.removeClass 'editing'
+  # 
+  # # If you hit `enter`, we're through editing the item.
+  # updateOnEnter: (event) ->
+  #   @close() if event.keyCode is 13
+  # 
+  # # Remove the item, destroy the model.
+  # clear: ->
+  #   @model.clear()
