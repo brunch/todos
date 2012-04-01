@@ -1,10 +1,10 @@
-@import "nib"
+@import 'nib'
 
 html
   background: #A1AFC9
 
 body
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
   font-size: 14px
   line-height: 1.4em
   background: #A1AFC9
@@ -89,7 +89,7 @@ ul
       margin: 0
       line-height: 1.6em
       border: 1px solid #999
-      outline none
+      outline: none
       padding: 10px 7px 0px 27px
       box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset
 
@@ -97,10 +97,10 @@ ul
     position: relative
     top: 9px
     margin: 0 10px 0 7px
-    float left
+    float: left
 
   .done .todo-content
-    text-decoration line-through
+    text-decoration: line-through
     color: #777
 
   .todo-destroy
@@ -132,7 +132,7 @@ ul
   color: #777
 
   .todo-count
-    float left
+    float: left
 
   .todo-count .number
     font-weight: bold
@@ -157,8 +157,9 @@ ul
 #instructions
   width: 520px
   margin: 10px auto
+  padding-left: 0
   color: #777
-  text-shadow rgba(200, 210, 230, 0.8) 0 1px 0
+  text-shadow: rgba(200, 210, 230, 0.8) 0 1px 0
   text-align: center
 
   a
@@ -168,7 +169,7 @@ ul
   width: 520px
   margin: 30px auto
   color: #333
-  text-shadow rgba(200, 210, 230, 0.8) 0 1px 0
+  text-shadow: rgba(200, 210, 230, 0.8) 0 1px 0
   text-align: center
 
   span, a
@@ -190,7 +191,7 @@ ul
   bottom 0
   left: 1px
   text-align: center
-  text-shadow 1px 0 2px #000
+  text-shadow: 1px 0 2px #000
   transform: rotate(90deg)
   width: 100%
 
@@ -200,7 +201,7 @@ ul
   left: -2px
   top: 0
   text-align: center
-  text-shadow none
+  text-shadow: none
   transform: rotate(-90deg)
   width: 100%
 
@@ -209,7 +210,7 @@ ul
   right -0.375em
   top: 50%
   margin-top: -.05em
-  text-shadow 0 1px 2px #000
+  text-shadow: 0 1px 2px #000
   transform: rotate(0)
 
 .ui-tooltip-left:after
@@ -217,7 +218,7 @@ ul
   left: -0.375em
   top: 50%
   margin-top: .1em
-  text-shadow 0 -1px 2px #000
+  text-shadow: 0 -1px 2px #000
   transform: rotate(180deg)
 
 .ui-tooltip, .ui-tooltip-top, .ui-tooltip-right,
@@ -234,10 +235,7 @@ ul
   border-radius: 4px
   box-shadow: 0 1px 2px #000\, inset 0 0 0 1px #222\, inset 0 2px #666666\, inset 0 -2px 2px #444
   background-color: #3b3b3b
-  background-image: -moz-linear-gradient(top, #555, #222)
-  background-image: -webkit-gradient(linear, left: top, left: bottom, color-stop(0, #555), color-stop(1, #222))
-  filter: 'progid:DXImageTransform.Microsoft.gradient(startColorStr=#555,EndColorStr=#222)'
-  -ms-filter: 'progid:DXImageTransform.Microsoft.gradient(startColorStr=#555,EndColorStr=#222)'
+  background-image: linear-gradient(top, #555, #222)
 
 .ui-tooltip:after, .ui-tooltip-top:after, .ui-tooltip-right:after, .ui-tooltip-bottom:after, .ui-tooltip-left:after
   content: "\25B8"
