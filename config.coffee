@@ -28,12 +28,9 @@ exports.config =
     stylesheets:
       defaultExtension: 'styl'
       joinTo: 'stylesheets/app.css'
-      order:
-        before: ['vendor/styles/normalize.css']
-        after: ['vendor/styles/helpers.css']
 
     templates:
-      defaultExtension: 'eco'
+      defaultExtension: 'hbs'
       joinTo: 'javascripts/app.js'
 
   # Change this if you're using something other than backbone (e.g. 'ember').

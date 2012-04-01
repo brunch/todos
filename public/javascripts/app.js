@@ -155,6 +155,21 @@
   }
 }));
 (this.require.define({
+  "lib/view_helper": function(exports, require, module) {
+    (function() {
+
+  Handlebars.registerHelper('pluralize', function(count, fn) {
+    var pluralized, string;
+    string = fn();
+    pluralized = count === 1 ? string : "" + string + "s";
+    return new Handlebars.SafeString(pluralized);
+  });
+
+}).call(this);
+
+  }
+}));
+(this.require.define({
   "models/collection": function(exports, require, module) {
     (function() {
   var Collection,
@@ -464,304 +479,159 @@
 }));
 (this.require.define({
   "views/templates/home": function(exports, require, module) {
-    module.exports = function (__obj) {
-  if (!__obj) __obj = {};
-  var __out = [], __capture = function(callback) {
-    var out = __out, result;
-    __out = [];
-    callback.call(this);
-    result = __out.join('');
-    __out = out;
-    return __safe(result);
-  }, __sanitize = function(value) {
-    if (value && value.ecoSafe) {
-      return value;
-    } else if (typeof value !== 'undefined' && value != null) {
-      return __escape(value);
-    } else {
-      return '';
-    }
-  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
-  __safe = __obj.safe = function(value) {
-    if (value && value.ecoSafe) {
-      return value;
-    } else {
-      if (!(typeof value !== 'undefined' && value != null)) value = '';
-      var result = new String(value);
-      result.ecoSafe = true;
-      return result;
-    }
-  };
-  if (!__escape) {
-    __escape = __obj.escape = function(value) {
-      return ('' + value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-    };
-  }
-  (function() {
-    (function() {
-    
-      __out.push('<div id="todo-app">\n  <h1>Todos</h1>\n</div>\n<ul id="instructions">\n  <li>Double-click to edit a todo.</li>\n  <!-- <li><a href="../docs/todos.html">View the annotated source.</a></li> -->\n</ul>\n<div id="credits">\n  <span>Originally created by</span>\n  <a href="http://jgn.me/">J&eacute;r&ocirc;me Gravel-Niquet</a>\n  <span>Rewritten by</span>\n  <a href="https://github.com/brunch">Brunch Team</a>\n</div>\n');
-    
-    }).call(this);
-    
-  }).call(__obj);
-  __obj.safe = __objSafe, __obj.escape = __escape;
-  return __out.join('');
-}
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var foundHelper, self=this;
+
+
+  return "<div id=\"todo-app\">\n  <h1>Todos</h1>\n</div>\n<ul id=\"instructions\">\n  <li>Double-click to edit a todo.</li>\n  <!-- <li><a href=\"../docs/todos.html\">View the annotated source.</a></li> -->\n</ul>\n<div id=\"credits\">\n  <span>Originally created by</span>\n  <a href=\"http://jgn.me/\">J&eacute;r&ocirc;me Gravel-Niquet</a>\n  <span>Rewritten by</span>\n  <a href=\"https://github.com/brunch\">Brunch Team</a>\n</div>\n";});
   }
 }));
 (this.require.define({
   "views/templates/new_todo": function(exports, require, module) {
-    module.exports = function (__obj) {
-  if (!__obj) __obj = {};
-  var __out = [], __capture = function(callback) {
-    var out = __out, result;
-    __out = [];
-    callback.call(this);
-    result = __out.join('');
-    __out = out;
-    return __safe(result);
-  }, __sanitize = function(value) {
-    if (value && value.ecoSafe) {
-      return value;
-    } else if (typeof value !== 'undefined' && value != null) {
-      return __escape(value);
-    } else {
-      return '';
-    }
-  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
-  __safe = __obj.safe = function(value) {
-    if (value && value.ecoSafe) {
-      return value;
-    } else {
-      if (!(typeof value !== 'undefined' && value != null)) value = '';
-      var result = new String(value);
-      result.ecoSafe = true;
-      return result;
-    }
-  };
-  if (!__escape) {
-    __escape = __obj.escape = function(value) {
-      return ('' + value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-    };
-  }
-  (function() {
-    (function() {
-    
-      __out.push('<input id="new-todo" placeholder="What needs to be done?" type="text">\n<div class="ui-tooltip-top">Press Enter to save this task</div>\n');
-    
-    }).call(this);
-    
-  }).call(__obj);
-  __obj.safe = __objSafe, __obj.escape = __escape;
-  return __out.join('');
-}
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var foundHelper, self=this;
+
+
+  return "<input id=\"new-todo\" placeholder=\"What needs to be done?\" type=\"text\">\n<div class=\"ui-tooltip-top\">Press Enter to save this task</div>\n";});
   }
 }));
 (this.require.define({
   "views/templates/stats": function(exports, require, module) {
-    module.exports = function (__obj) {
-  if (!__obj) __obj = {};
-  var __out = [], __capture = function(callback) {
-    var out = __out, result;
-    __out = [];
-    callback.call(this);
-    result = __out.join('');
-    __out = out;
-    return __safe(result);
-  }, __sanitize = function(value) {
-    if (value && value.ecoSafe) {
-      return value;
-    } else if (typeof value !== 'undefined' && value != null) {
-      return __escape(value);
-    } else {
-      return '';
-    }
-  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
-  __safe = __obj.safe = function(value) {
-    if (value && value.ecoSafe) {
-      return value;
-    } else {
-      if (!(typeof value !== 'undefined' && value != null)) value = '';
-      var result = new String(value);
-      result.ecoSafe = true;
-      return result;
-    }
-  };
-  if (!__escape) {
-    __escape = __obj.escape = function(value) {
-      return ('' + value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-    };
-  }
-  (function() {
-    (function() {
-    
-      if (this.stats.total) {
-        __out.push('\n  <span class="todo-count">\n    <span class="number">');
-        __out.push(__sanitize(this.stats.remaining));
-        __out.push('</span>\n    <span class="word">\n      ');
-        if (this.stats.remaining === 1) {
-          __out.push('item');
-        } else {
-          __out.push('items');
-        }
-        __out.push('\n    </span>\n    left.\n  </span>\n');
-      }
-    
-      __out.push('\n\n');
-    
-      if (this.stats.done) {
-        __out.push('\n  <a class="todo-clear">\n    Clear <span class="number-done">');
-        __out.push(__sanitize(this.stats.done));
-        __out.push('</span> completed\n    <span class="word-done">\n      ');
-        if (this.stats.done === 1) {
-          __out.push('item');
-        } else {
-          __out.push('items');
-        }
-        __out.push('\n    </span>\n  </span>\n');
-      }
-    
-      __out.push('\n');
-    
-    }).call(this);
-    
-  }).call(__obj);
-  __obj.safe = __objSafe, __obj.escape = __escape;
-  return __out.join('');
-}
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression, blockHelperMissing=helpers.blockHelperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, stack2;
+  buffer += "\n  <span class=\"todo-count\">\n    <span class=\"number\">";
+  foundHelper = helpers.stats;
+  stack1 = foundHelper || depth0.stats;
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.remaining);
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "stats.remaining", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</span>\n    <span class=\"word\">\n      ";
+  foundHelper = helpers.stats;
+  stack1 = foundHelper || depth0.stats;
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.remaining);
+  foundHelper = helpers.pluralize;
+  stack2 = foundHelper || depth0.pluralize;
+  tmp1 = self.program(2, program2, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.noop;
+  if(foundHelper && typeof stack2 === functionType) { stack1 = stack2.call(depth0, stack1, tmp1); }
+  else { stack1 = blockHelperMissing.call(depth0, stack2, stack1, tmp1); }
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n    </span>\n    left.\n  </span>\n";
+  return buffer;}
+function program2(depth0,data) {
+  
+  
+  return "item";}
+
+function program4(depth0,data) {
+  
+  var buffer = "", stack1, stack2;
+  buffer += "\n  <a class=\"todo-clear\">\n    Clear <span class=\"number-done\">";
+  foundHelper = helpers.stats;
+  stack1 = foundHelper || depth0.stats;
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.done);
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "stats.done", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</span> completed\n    <span class=\"word-done\">\n      ";
+  foundHelper = helpers.stats;
+  stack1 = foundHelper || depth0.stats;
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.done);
+  foundHelper = helpers.pluralize;
+  stack2 = foundHelper || depth0.pluralize;
+  tmp1 = self.program(5, program5, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.noop;
+  if(foundHelper && typeof stack2 === functionType) { stack1 = stack2.call(depth0, stack1, tmp1); }
+  else { stack1 = blockHelperMissing.call(depth0, stack2, stack1, tmp1); }
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n    </span>\n  </span>\n";
+  return buffer;}
+function program5(depth0,data) {
+  
+  
+  return "item";}
+
+  foundHelper = helpers.stats;
+  stack1 = foundHelper || depth0.stats;
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.total);
+  stack2 = helpers['if'];
+  tmp1 = self.program(1, program1, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.noop;
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n\n";
+  foundHelper = helpers.stats;
+  stack1 = foundHelper || depth0.stats;
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.done);
+  stack2 = helpers['if'];
+  tmp1 = self.program(4, program4, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.noop;
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n";
+  return buffer;});
   }
 }));
 (this.require.define({
   "views/templates/todo": function(exports, require, module) {
-    module.exports = function (__obj) {
-  if (!__obj) __obj = {};
-  var __out = [], __capture = function(callback) {
-    var out = __out, result;
-    __out = [];
-    callback.call(this);
-    result = __out.join('');
-    __out = out;
-    return __safe(result);
-  }, __sanitize = function(value) {
-    if (value && value.ecoSafe) {
-      return value;
-    } else if (typeof value !== 'undefined' && value != null) {
-      return __escape(value);
-    } else {
-      return '';
-    }
-  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
-  __safe = __obj.safe = function(value) {
-    if (value && value.ecoSafe) {
-      return value;
-    } else {
-      if (!(typeof value !== 'undefined' && value != null)) value = '';
-      var result = new String(value);
-      result.ecoSafe = true;
-      return result;
-    }
-  };
-  if (!__escape) {
-    __escape = __obj.escape = function(value) {
-      return ('' + value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-    };
-  }
-  (function() {
-    (function() {
-    
-      __out.push('<div class="todo ');
-    
-      if (this.todo.done) __out.push('done');
-    
-      __out.push('">\n  <div class="display">\n    <input class="check" type="checkbox" ');
-    
-      if (this.todo.done) __out.push('checked="checked"');
-    
-      __out.push('>\n  <div class="todo-content">');
-    
-      __out.push(__sanitize(this.todo.content));
-    
-      __out.push('</div>\n    <span class="todo-destroy"></span>\n  </div>\n  <div class="edit">\n    <input class="todo-input" type="text" value="');
-    
-      __out.push(__sanitize(this.todo.content));
-    
-      __out.push('">\n  </div>\n</div>\n');
-    
-    }).call(this);
-    
-  }).call(__obj);
-  __obj.safe = __objSafe, __obj.escape = __escape;
-  return __out.join('');
-}
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+
+function program1(depth0,data) {
+  
+  
+  return "checked=\"checked\"";}
+
+  buffer += "<div class=\"todo <% if @todo.done: %>done<% end %>\">\n  <div class=\"display\">\n    <input class=\"check\" type=\"checkbox\" ";
+  foundHelper = helpers.todo;
+  stack1 = foundHelper || depth0.todo;
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.done);
+  stack2 = helpers['if'];
+  tmp1 = self.program(1, program1, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.noop;
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += ">\n  <div class=\"todo-content\">";
+  foundHelper = helpers.todo;
+  stack1 = foundHelper || depth0.todo;
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.content);
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "todo.content", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</div>\n    <span class=\"todo-destroy\"></span>\n  </div>\n  <div class=\"edit\">\n    <input class=\"todo-input\" type=\"text\" value=\"";
+  foundHelper = helpers.todo;
+  stack1 = foundHelper || depth0.todo;
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.content);
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "todo.content", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\">\n  </div>\n</div>\n";
+  return buffer;});
   }
 }));
 (this.require.define({
   "views/templates/todos": function(exports, require, module) {
-    module.exports = function (__obj) {
-  if (!__obj) __obj = {};
-  var __out = [], __capture = function(callback) {
-    var out = __out, result;
-    __out = [];
-    callback.call(this);
-    result = __out.join('');
-    __out = out;
-    return __safe(result);
-  }, __sanitize = function(value) {
-    if (value && value.ecoSafe) {
-      return value;
-    } else if (typeof value !== 'undefined' && value != null) {
-      return __escape(value);
-    } else {
-      return '';
-    }
-  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
-  __safe = __obj.safe = function(value) {
-    if (value && value.ecoSafe) {
-      return value;
-    } else {
-      if (!(typeof value !== 'undefined' && value != null)) value = '';
-      var result = new String(value);
-      result.ecoSafe = true;
-      return result;
-    }
-  };
-  if (!__escape) {
-    __escape = __obj.escape = function(value) {
-      return ('' + value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-    };
-  }
-  (function() {
-    (function() {
-    
-      __out.push('<ul id="todos"></ul>\n');
-    
-    }).call(this);
-    
-  }).call(__obj);
-  __obj.safe = __objSafe, __obj.escape = __escape;
-  return __out.join('');
-}
+    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var foundHelper, self=this;
+
+
+  return "<ul id=\"todos\"></ul>\n";});
   }
 }));
 (this.require.define({
@@ -940,6 +810,8 @@
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+  require('lib/view_helper');
 
   module.exports = View = (function(_super) {
 

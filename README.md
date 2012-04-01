@@ -1,6 +1,6 @@
 # Todos
 
-This is a rewrite of Todos (Backbone's example application). We rewrote it to provide a simple and complete brunch example. This example also contains a test suite using [QUnit](http://docs.jquery.com/Qunit). Special thanks to [Jérôme Gravel-Niquet](http://jgn.me/) for his groundwork.
+This is a rewrite of Todos (Backbone's example application). We rewrote it to provide a simple and complete brunch example. Special thanks to [Jérôme Gravel-Niquet](http://jgn.me/) for his groundwork.
 
 ## App Structure
 
@@ -12,8 +12,3 @@ Why didn't we do that in this example? Unless you have a large set of items the 
 
 Use `brunch build` or `brunch watch` to compile changes in src folder.
 Usually we don't track the js/css files in our repositories, but decided to keep them here because we hope it would be easier to start using it.
-
-## Improvements
-
-* Add unit tests for views
-* Add inline comments
