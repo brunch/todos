@@ -595,14 +595,30 @@ function program5(depth0,data) {
 function program1(depth0,data) {
   
   
+  return "done";}
+
+function program3(depth0,data) {
+  
+  
   return "checked=\"checked\"";}
 
-  buffer += "<div class=\"todo <% if @todo.done: %>done<% end %>\">\n  <div class=\"display\">\n    <input class=\"check\" type=\"checkbox\" ";
+  buffer += "<div class=\"todo ";
   foundHelper = helpers.todo;
   stack1 = foundHelper || depth0.todo;
   stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.done);
   stack2 = helpers['if'];
   tmp1 = self.program(1, program1, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.noop;
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\">\n  <div class=\"display\">\n    <input class=\"check\" type=\"checkbox\" ";
+  foundHelper = helpers.todo;
+  stack1 = foundHelper || depth0.todo;
+  stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.done);
+  stack2 = helpers['if'];
+  tmp1 = self.program(3, program3, data);
   tmp1.hash = {};
   tmp1.fn = tmp1;
   tmp1.inverse = self.noop;
