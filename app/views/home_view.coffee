@@ -1,13 +1,12 @@
-homeTemplate = require './templates/home'
+View = require './view'
+application = require 'application'
+template = require './templates/home'
 
-
-class exports.HomeView extends Backbone.View
+module.exports = class HomeView extends View
+  template: template
   el: '#home-view'
 
-  render: ->
-    console.log 'Rendering',
-    @$el.html homeTemplate()
+  afterRender: ->
     $todo =  @$el.find('#todo-app')
-    for viewName in ['newTodo', 'todoList', 'stats']
-      $todo.append app.views[viewName].render().el
-    this
+    for viewName in ['newTodo', 'todos', 'stats']
+      $todo.append application["#{viewName}View"].render().el

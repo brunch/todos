@@ -1,5 +1,6 @@
-class exports.Todo extends Backbone.Model
+Model = require './model'
 
+module.exports = class Todo extends Model
   defaults:
     content: 'Empty todo...'
     done: no

@@ -1,7 +1,7 @@
-{Todo} = require 'models/todo'
+Collection = require './collection'
+Todo = require 'models/todo'
 
-
-class exports.TodoList extends Backbone.Collection
+module.exports = class Todos extends Collection
   model: Todo
 
   initialize: ->
@@ -12,7 +12,7 @@ class exports.TodoList extends Backbone.Collection
       todo.get 'done'
 
   remaining: ->
-    @without.apply @, @done()
+    @without.apply this, @done()
 
   nextOrder: ->
     return 1 unless @length

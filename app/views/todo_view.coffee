@@ -1,6 +1,8 @@
-todoTemplate = require './templates/todo'
+View = require './view'
+template = require './templates/todo'
 
-class exports.TodoView extends Backbone.View
+module.exports = class TodoView extends View
+  template: template
   tagName: 'li'
 
   events:
@@ -13,13 +15,13 @@ class exports.TodoView extends Backbone.View
     @model.bind 'change', @render
     @model.view = this
 
-  render: =>
-    @$el.html todoTemplate todo: @model.toJSON()
-    # Bind event directly to input, cause older browsers doesn't
-    # support this event on several types of elements.
-    # Originally, this event was only applicable to form elements.
+  getRenderData: ->
+    {
+      todo: @model.toJSON()
+    }
+
+  afterRender: ->
     @$('.todo-input').bind 'blur', @update
-    this
 
   toggleDone: ->
     @model.toggle()
@@ -33,7 +35,7 @@ class exports.TodoView extends Backbone.View
     @$el.removeClass 'editing'
 
   updateOnEnter: (event) ->
-    @update() if event.keyCode is $.ui.keyCode.ENTER
+    @update() if event.keyCode is 13
 
   remove: ->
     @$el.remove()

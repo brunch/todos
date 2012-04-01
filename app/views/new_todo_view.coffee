@@ -1,25 +1,23 @@
-newTodoTemplate = require './templates/new_todo'
+View = require './view'
+application = require 'application'
+template = require './templates/new_todo'
 
-class exports.NewTodoView extends Backbone.View
+module.exports = class NewTodoView extends View
+  template: template
   id: 'new-todo-view'
-
   events:
     'keypress #new-todo': 'createOnEnter'
     'keyup #new-todo': 'showHint'
 
-  render: ->
-    @$el.html newTodoTemplate()
-    this
-
   newAttributes: ->
     attributes =
-      order: app.todoList.nextOrder()
+      order: application.todos.nextOrder()
     attributes.content = @$('#new-todo').val() if @$('#new-todo').val()
     attributes
 
   createOnEnter: (event) ->
     return unless event.keyCode is 13
-    app.todoList.create @newAttributes()
+    application.todos.create @newAttributes()
     @$('#new-todo').val ''
 
   showHint: (event) ->

@@ -1,1 +1,3 @@
-class exports.User extends Backbone.View
+View = require './view'
+
+module.exports = class User extends View
