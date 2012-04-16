@@ -1,6 +1,7 @@
 exports.config =
   # Edit the next line to change default build path.
-  buildPath: 'public'
+  paths:
+    public: 'public'
 
   files:
     javascripts:
@@ -36,9 +37,6 @@ exports.config =
   # Change this if you're using something other than backbone (e.g. 'ember').
   # Content of files, generated with `brunch generate` depends on the setting.
   # framework: 'backbone'
-
-  # Enable or disable minifying of result js / css files.
-  minify: no
 
   # Settings of web server that will run with `brunch watch [--server]`.
   # server:
