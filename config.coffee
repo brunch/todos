@@ -27,11 +27,9 @@ exports.config =
         ]
 
     stylesheets:
-      defaultExtension: 'styl'
       joinTo: 'stylesheets/app.css'
 
     templates:
-      defaultExtension: 'hbs'
       joinTo: 'javascripts/app.js'
 
   # Change this if you're using something other than backbone (e.g. 'ember').
