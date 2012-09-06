@@ -27,7 +27,7 @@ describe 'app.views.new_todo_view',
     equals $("#new-todo").val(), ''
     equals app.todoList.length, 1
 
-  asyncTest("show hint after 1 second", ->
+  asyncTest "show hint after 1 second", ->
     expect 1
     $('#new-todo').val('bring out the garbage')
     app.views.newTodo.showHint()
